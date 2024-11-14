@@ -33,13 +33,13 @@ public class Order {
             OrderCommand lastCommand = commandHistory.remove(commandHistory.size() - 1);
             lastCommand.undo();
         } else {
-            System.out.println("No commands to undo.");
+            System.out.println(" No commands to undo.");
         }
     }
     public void showDetails(){
-        System.out.println("order details: ");
+        System.out.println(" order details: ");
         for (MenuItem item : items) {
-            System.out.println(item.getName() + "Price: $" + item.getPrice());
+            System.out.println(item.getName() + " Price: $" + item.getPrice());
         } 
     }
 }

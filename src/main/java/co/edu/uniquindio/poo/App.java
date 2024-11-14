@@ -250,7 +250,7 @@ public class App {
                     boolean exit2 = false;
                     do {
                         System.out.println(" Delivery Type");
-                        System.out.println("1. Standar Delivery");
+                        System.out.println("1. Standard Delivery");
                         System.out.println("2. Pick Up Delivery");
                         System.out.print("Select An Option Or 0 To Exit: ");
 
@@ -259,9 +259,12 @@ public class App {
                             int number = scanner.nextInt();
 
                             if (number == 1) {
+                                System.out.println("Enter Your Address: ");
+                                scanner.nextLine();
+                                String address = scanner.nextLine();
                                 Delivery standarDelivery = new Delivery(new StandardDelivery());
                                 orderDelivery.showDetails();
-                                System.out.println("your standard delivery has a cost of: "
+                                System.out.println("The Delivery For The Address: " + address + " Is Ready And has a cost of: "
                                         + standarDelivery.calculateDeliveryCost(invoiceDelivery));
 
                                 exit2 = true;
@@ -339,14 +342,20 @@ public class App {
                     break;
                 case 7:
                     boolean exit4 = false;
+                    boolean firstIteration = true;
                     do {
                         System.out.println("1. For A Food Complaint Write: Food Complaint");
                         System.out.println("2. For A Minor Complaint Write: Minor Complaint ");
                         System.out.println("3. For Another Type Of Complaint Write Your Complaint ");
 
+                        if (firstIteration) {
+                            scanner.nextLine(); 
+                            firstIteration = false;  
+                        }
+
                         System.out.println("Write The Type Of Complaint: ");
-                        scanner.nextLine();
                         String complaint = scanner.nextLine();
+
                         ComplaintHandler chef10 = new ChefHandler();
                         ComplaintHandler waiter10 = new WaiterHandler();
                         ComplaintHandler manager10 = new ManagerHandler();
@@ -395,10 +404,7 @@ public class App {
 
                     } while (!exit5);
                     break;
-                default:
-                    System.out.println("Opción no válida. Intente de nuevo.");
-
-                    break;
+                
             }
         } while (opcion != 9);
 

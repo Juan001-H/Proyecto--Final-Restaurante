@@ -72,12 +72,13 @@ public class Restaurant {
 
     public void showDetails(){
         System.out.println("Restaurant Name: " + name + "', tables: " + tables.size() + ", employees: " + employees.size());
-        System.out.println("Menu:");
+        
         
         System.out.println("Employees: ");
         for (EmployeeComponent employee : employees) {
             System.out.println("Employee: " + employee.getName() +" " + employee.getlastName() + ", Phone: " + employee.getPhone() + ", ID : " + employee.getiD());
         }
+        System.out.println("Menu:");
         for (MenuItem menuitem : menu) {
             menuitem.display();
         }

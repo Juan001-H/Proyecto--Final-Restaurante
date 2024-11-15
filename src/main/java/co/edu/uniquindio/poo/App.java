@@ -7,10 +7,10 @@ import java.util.Scanner;
 import co.edu.uniquindio.poo.DeliveryStrategy.Delivery;
 import co.edu.uniquindio.poo.DeliveryStrategy.PickUpDelivery;
 import co.edu.uniquindio.poo.DeliveryStrategy.StandardDelivery;
-import co.edu.uniquindio.poo.ChainOfResponsabilityValidation.ChefHandler;
-import co.edu.uniquindio.poo.ChainOfResponsabilityValidation.ComplaintHandler;
-import co.edu.uniquindio.poo.ChainOfResponsabilityValidation.ManagerHandler;
-import co.edu.uniquindio.poo.ChainOfResponsabilityValidation.WaiterHandler;
+import co.edu.uniquindio.poo.ChainOfResponsibilityValidation.ChefHandler;
+import co.edu.uniquindio.poo.ChainOfResponsibilityValidation.ComplaintHandler;
+import co.edu.uniquindio.poo.ChainOfResponsibilityValidation.ManagerHandler;
+import co.edu.uniquindio.poo.ChainOfResponsibilityValidation.WaiterHandler;
 import co.edu.uniquindio.poo.CommandOrder.Order;
 import co.edu.uniquindio.poo.EmployeeComposite.EmployeeComposite;
 import co.edu.uniquindio.poo.EmployeeComposite.EmployeeLeaf;
@@ -114,6 +114,7 @@ public class App {
         Order order = null;
         Customer customer = null;
 
+        // Creacion De casos Para Probar Las Funcionalidades Del Restaurante
         do {
             System.out.println("\033[1m\033[48;5;0m\033[38;5;15m\n=============================================");
             System.out.println("\033[1m\033[48;5;0m\033[38;5;1m   Welcome To The Restaurant Flash Foods     ");
@@ -141,9 +142,11 @@ public class App {
             opcion = scanner.nextInt();
 
             switch (opcion) {
+                // Prueba Del Metodo Que Mustra Los Detalles Del Restaurante
                 case 1:
                     restaurante.showDetails();
                     break;
+                //Caso Para Probar La Funcionalidad A La Hora De Crear Reservas
                 case 2:
 
                     System.out.println("Enter customer First name: ");
@@ -185,6 +188,8 @@ public class App {
                     autenticado2.createReservation(customer7, numberOfPeople, reservationDate);
                     System.out.println("Reservation added successfully!");
                     break;
+
+                //En Este Caso Se Prueba El Funcionamiento De La Creacion De Ordenes
                 case 3:
 
                     order = new Order();
@@ -216,6 +221,7 @@ public class App {
                     } while (!exit);
 
                     break;
+                //En Este Caso Se Prueba El Funcionamiento De Las Diferentes Estrategias De Delivery
                 case 4:
                     Order orderDelivery = new Order();
                     boolean exitDelivery = false;
@@ -284,6 +290,7 @@ public class App {
                     } while (!exit2);
                     break;
 
+                //Prueba Del Decorator Para Creacion De Facturas
                 case 5:
                     boolean exit3 = false;
                     do {
@@ -320,6 +327,8 @@ public class App {
                         }
                     } while (!exit3);
                     break;
+
+                //Se Prueba La Funcionalidad Del Metodo De Obtener El Estado De La Orden
                 case 6:
                     if (customer != null && customer.getName() != null) {
                         if (order != null) {
@@ -340,6 +349,8 @@ public class App {
                         System.out.println("The Order Has Not Been Taken ");
                     }
                     break;
+
+                //Uso Del Chain Of Responsibility Para Pasar Quejas A Traves De Una Cadena De Manejadores
                 case 7:
                     boolean exit4 = false;
                     boolean firstIteration = true;
@@ -374,6 +385,8 @@ public class App {
 
                     } while (!exit4);
                     break;
+
+                // Prueba De Los Metodos De Pago Despues De Generar Una Factura
                 case 8:
                     boolean exit5 = false;
                     do {

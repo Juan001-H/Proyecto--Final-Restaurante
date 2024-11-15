@@ -1,4 +1,4 @@
-package co.edu.uniquindio.poo.ChainOfResponsabilityValidation;
+package co.edu.uniquindio.poo.ChainOfResponsibilityValidation;
 
 public class ManagerHandler extends ComplaintHandler {
 

@@ -20,6 +20,14 @@ public class RealReservation implements ReservationService {
 
     }
 
+    public LocalDateTime getReservationDate() {
+        return reservationDate;
+    }
+
+    public int getPeopleNumber() {
+        return peopleNumber;
+    }
+
     @Override
     public void canceledReservation(Customer CustomerName) {
         if (this.CustomerName != null && this.CustomerName.equals(CustomerName)) {

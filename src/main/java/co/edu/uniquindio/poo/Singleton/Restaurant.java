@@ -1,5 +1,6 @@
 package co.edu.uniquindio.poo.Singleton;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,5 +94,22 @@ public class Restaurant {
             totalSeats+= table.getSeat();
         }
         return totalSeats;
+    }
+    public int availableSeats(){
+        int seats = totalseats();
+
+        for (ResarvationProxy resarvationProxy : reservations) {
+            seats -= resarvationProxy.getPeopleNumber();
+        }
+        return seats;
+    }
+    public LocalDateTime availableDate(){
+        LocalDateTime time = null;
+
+        for (ResarvationProxy resarvationProxy : reservations) {
+            time = resarvationProxy.getDateTime();
+            
+        }
+        return time;
     }
 }

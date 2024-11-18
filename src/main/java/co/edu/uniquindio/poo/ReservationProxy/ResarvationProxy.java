@@ -42,5 +42,11 @@ public class ResarvationProxy implements ReservationService{
     public void add(ResarvationProxy reservations) {
         throw new UnsupportedOperationException("Cannot add subordinates to a leaf employee");
     }
+    public int getPeopleNumber(){
+        return realReservation.getPeopleNumber();
+    }
+    public LocalDateTime getDateTime(){
+        return realReservation.getReservationDate();
+    }
 
 }

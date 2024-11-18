@@ -164,21 +164,6 @@ public class App {
 
                     Customer customer7 = person13.createCustomer(firstName, customerLastName, customerId,
                             customerPhone);
-                    boolean people = false;
-                    int numberOfPeople = 0;
-                    while (!people) {
-                        System.out.print("Enter number of people for reservation: ");
-                        int numberOfPeople2 = scanner.nextInt();
-                        scanner.nextLine();
-                        if (numberOfPeople2 <= restaurante.totalseats()) {
-                            numberOfPeople = numberOfPeople2;
-                            people = true;
-                        } else {
-                            System.out.println(
-                                    "The Number Of People Exceed Our Capacity, Please Put A Number Between 0 And "
-                                            + restaurante.totalseats());
-                        }
-                    }
 
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                     LocalDateTime reservationDate = null;
@@ -200,6 +185,21 @@ public class App {
                         } catch (DateTimeParseException e) {
                             System.out.println(
                                     "Error: Invalid date format. Please enter the date in the format YYYY-MM-DD HH:MM");
+                        }
+                    }
+
+                    boolean people = false;
+                    int numberOfPeople = 0;
+                    while (!people) {
+                        System.out.print("Enter number of people for reservation: ");
+                        int numberOfPeople2 = scanner.nextInt();
+                        scanner.nextLine();
+                        if (numberOfPeople2 <= restaurante.availableSeats()) {
+                            numberOfPeople = numberOfPeople2;
+                            people = true;
+                        } else {
+                            System.out.println(
+                                    "The Number Of People Exceed Our Capacity, The Total Number Of Remaining Seats Is: " + restaurante.availableSeats());
                         }
                     }
 

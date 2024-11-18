@@ -44,4 +44,6 @@ public class Table implements Prototype {
                 "table Number: " + tableNumber + ", number of seats: " + seat + ", is available : " + isAvailable);
     }
 
+    
+
 }

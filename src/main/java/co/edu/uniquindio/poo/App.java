@@ -46,6 +46,8 @@ public class App {
         Table table2 = table.clone();
         table2.setTableNumber("2");
         table.setTableNumber("1");
+        Table table3 = table.clone();
+        table3.setTableNumber("3");
 
         // Creaciòn de las personas con AbstractFactory y Builder
         PersonFactory person13 = new RestaurantPersonFactory();
@@ -65,6 +67,7 @@ public class App {
 
         restaurante.addTable(table);
         restaurante.addTable(table2);
+        restaurante.addTable(table3);
 
         // Agregaciòn de empleados segùn cargo con el composite
         EmployeeLeaf chef = new EmployeeLeaf(chef11, restaurante.getEmployees());
@@ -120,7 +123,7 @@ public class App {
             System.out.println("\033[1m\033[48;5;0m\033[38;5;1m   Welcome To The Restaurant Flash Foods     ");
             System.out.println("\033[1m\033[48;5;0m\033[38;5;15m=============================================");
 
-            System.out.println("\033[1m\033[48;5;0m\033[38;5;15m1. Show Restaurant Details                   \033[0m"); 
+            System.out.println("\033[1m\033[48;5;0m\033[38;5;15m1. Show Restaurant Details                   \033[0m");
 
             System.out.println("\033[1m\033[48;5;0m\033[38;5;15m2. Make A Reservation                        \033[0m");
 
@@ -146,7 +149,7 @@ public class App {
                 case 1:
                     restaurante.showDetails();
                     break;
-                //Caso Para Probar La Funcionalidad A La Hora De Crear Reservas
+                // Caso Para Probar La Funcionalidad A La Hora De Crear Reservas
                 case 2:
 
                     System.out.println("Enter customer First name: ");
@@ -161,9 +164,21 @@ public class App {
 
                     Customer customer7 = person13.createCustomer(firstName, customerLastName, customerId,
                             customerPhone);
-                    System.out.print("Enter number of people for reservation: ");
-                    int numberOfPeople = scanner.nextInt();
-                    scanner.nextLine();
+                    boolean people = false;
+                    int numberOfPeople = 0;
+                    while (!people) {
+                        System.out.print("Enter number of people for reservation: ");
+                        int numberOfPeople2 = scanner.nextInt();
+                        scanner.nextLine();
+                        if (numberOfPeople2 <= restaurante.totalseats()) {
+                            numberOfPeople = numberOfPeople2;
+                            people = true;
+                        } else {
+                            System.out.println(
+                                    "The Number Of People Exceed Our Capacity, Please Put A Number Between 0 And "
+                                            + restaurante.totalseats());
+                        }
+                    }
 
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                     LocalDateTime reservationDate = null;
@@ -174,8 +189,14 @@ public class App {
                         String dateInput = scanner.nextLine();
 
                         try {
+
                             reservationDate = LocalDateTime.parse(dateInput, formatter);
-                            validDate = true;
+                            if (reservationDate.isAfter(LocalDateTime.now())) {
+                                validDate = true;
+                            } else {
+                                System.out
+                                        .println("The Date Of The Reservation Can`t Be Before " + LocalDateTime.now());
+                            }
                         } catch (DateTimeParseException e) {
                             System.out.println(
                                     "Error: Invalid date format. Please enter the date in the format YYYY-MM-DD HH:MM");
@@ -189,7 +210,7 @@ public class App {
                     System.out.println("Reservation added successfully!");
                     break;
 
-                //En Este Caso Se Prueba El Funcionamiento De La Creacion De Ordenes
+                // En Este Caso Se Prueba El Funcionamiento De La Creacion De Ordenes
                 case 3:
 
                     order = new Order();
@@ -221,7 +242,8 @@ public class App {
                     } while (!exit);
 
                     break;
-                //En Este Caso Se Prueba El Funcionamiento De Las Diferentes Estrategias De Delivery
+                // En Este Caso Se Prueba El Funcionamiento De Las Diferentes Estrategias De
+                // Delivery
                 case 4:
                     Order orderDelivery = new Order();
                     boolean exitDelivery = false;
@@ -270,8 +292,9 @@ public class App {
                                 String address = scanner.nextLine();
                                 Delivery standarDelivery = new Delivery(new StandardDelivery());
                                 orderDelivery.showDetails();
-                                System.out.println("The Delivery For The Address: " + address + " Is Ready And has a cost of: "
-                                        + standarDelivery.calculateDeliveryCost(invoiceDelivery));
+                                System.out.println(
+                                        "The Delivery For The Address: " + address + " Is Ready And has a cost of: "
+                                                + standarDelivery.calculateDeliveryCost(invoiceDelivery));
 
                                 exit2 = true;
                                 break;
@@ -290,7 +313,7 @@ public class App {
                     } while (!exit2);
                     break;
 
-                //Prueba Del Decorator Para Creacion De Facturas
+                // Prueba Del Decorator Para Creacion De Facturas
                 case 5:
                     boolean exit3 = false;
                     do {
@@ -328,7 +351,7 @@ public class App {
                     } while (!exit3);
                     break;
 
-                //Se Prueba La Funcionalidad Del Metodo De Obtener El Estado De La Orden
+                // Se Prueba La Funcionalidad Del Metodo De Obtener El Estado De La Orden
                 case 6:
                     if (customer != null && customer.getName() != null) {
                         if (order != null) {
@@ -350,7 +373,8 @@ public class App {
                     }
                     break;
 
-                //Uso Del Chain Of Responsibility Para Pasar Quejas A Traves De Una Cadena De Manejadores
+                // Uso Del Chain Of Responsibility Para Pasar Quejas A Traves De Una Cadena De
+                // Manejadores
                 case 7:
                     boolean exit4 = false;
                     boolean firstIteration = true;
@@ -360,8 +384,8 @@ public class App {
                         System.out.println("3. For Another Type Of Complaint Write Your Complaint ");
 
                         if (firstIteration) {
-                            scanner.nextLine(); 
-                            firstIteration = false;  
+                            scanner.nextLine();
+                            firstIteration = false;
                         }
 
                         System.out.println("Write The Type Of Complaint: ");
@@ -417,7 +441,7 @@ public class App {
 
                     } while (!exit5);
                     break;
-                
+
             }
         } while (opcion != 9);
 

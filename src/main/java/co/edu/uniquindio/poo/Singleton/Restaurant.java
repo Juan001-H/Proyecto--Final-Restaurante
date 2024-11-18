@@ -87,4 +87,11 @@ public class Restaurant {
             table.showDetails();
         }
     }
+    public int totalseats(){
+        int totalSeats = 0;
+        for (Table table : tables) {
+            totalSeats+= table.getSeat();
+        }
+        return totalSeats;
+    }
 }

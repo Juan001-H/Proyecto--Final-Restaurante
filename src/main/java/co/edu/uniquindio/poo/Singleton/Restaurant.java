@@ -15,7 +15,7 @@ public class Restaurant {
     private List<Table> tables;
     private List<EmployeeComponent> employees;
     private List<MenuItem> menu;
-    private List<ResarvationProxy>reservations;
+    private List<ResarvationProxy> reservations;
 
     private Restaurant(String name) {
         this.name = name;
@@ -51,6 +51,7 @@ public class Restaurant {
     public void addEmployee(EmployeeComponent employee) {
         employees.add(employee);
     }
+
     public void removeEmployee(EmployeeComponent employee) {
         employees.remove(employee);
     }
@@ -71,13 +72,14 @@ public class Restaurant {
         return menu;
     }
 
-    public void showDetails(){
-        System.out.println("Restaurant Name: " + name + "', tables: " + tables.size() + ", employees: " + employees.size());
-        
-        
+    public void showDetails() {
+        System.out.println(
+                "Restaurant Name: " + name + "', tables: " + tables.size() + ", employees: " + employees.size());
+
         System.out.println("Employees: ");
         for (EmployeeComponent employee : employees) {
-            System.out.println("Employee: " + employee.getName() +" " + employee.getlastName() + ", Phone: " + employee.getPhone() + ", ID : " + employee.getiD());
+            System.out.println("Employee: " + employee.getName() + " " + employee.getlastName() + ", Phone: "
+                    + employee.getPhone() + ", ID : " + employee.getiD());
         }
         System.out.println("Menu:");
         for (MenuItem menuitem : menu) {
@@ -88,28 +90,47 @@ public class Restaurant {
             table.showDetails();
         }
     }
-    public int totalseats(){
+
+    public int totalseats() {
         int totalSeats = 0;
         for (Table table : tables) {
-            totalSeats+= table.getSeat();
+            totalSeats += table.getSeat();
         }
         return totalSeats;
     }
-    public int availableSeats(){
-        int seats = totalseats();
 
-        for (ResarvationProxy resarvationProxy : reservations) {
-            seats -= resarvationProxy.getPeopleNumber();
+    public int availableSeats(LocalDateTime newReservationTime) {
+        int seats = totalseats();
+        ResarvationProxy closestReservation = null;
+
+        for (ResarvationProxy reservation : reservations) {
+            if (reservation.getendTime().isAfter(newReservationTime)) {
+                closestReservation = reservation;
+            }else{
+                if(reservation.getDateTime().minusHours(2).isBefore(newReservationTime)){
+                    closestReservation = reservation;
+                }
+            }
+        }
+
+        if (closestReservation != null) {
+            seats -= closestReservation.getPeopleNumber();
         }
         return seats;
     }
-    public LocalDateTime availableDate(){
-        LocalDateTime time = null;
+
+    public int available(LocalDateTime datee) {
+        int seats = totalseats();
 
         for (ResarvationProxy resarvationProxy : reservations) {
-            time = resarvationProxy.getDateTime();
-            
+            if (datee.isAfter(resarvationProxy.getendTime())
+                    || datee.isBefore(resarvationProxy.getDateTime().minusHours(2))) {
+                seats = totalseats();
+            } else {
+                seats = availableSeats(datee);
+            }
         }
-        return time;
+        return seats;
     }
+
 }

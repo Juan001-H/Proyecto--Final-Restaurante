@@ -18,9 +18,9 @@ public class ResarvationProxy implements ReservationService{
     }
 
     @Override
-    public void createReservation(Customer CustomerName, int peopleNumber, LocalDateTime reservationDate) {
+    public void createReservation(Customer CustomerName, int peopleNumber, LocalDateTime reservationDate,LocalDateTime endTime) {
         if(isAuthorized ==true){
-            realReservation.createReservation(CustomerName, peopleNumber, reservationDate);
+            realReservation.createReservation(CustomerName, peopleNumber, reservationDate, endTime);
         }else{
             System.out.println("Access denied : you do not have permission to create a reservation");
         }
@@ -48,5 +48,9 @@ public class ResarvationProxy implements ReservationService{
     public LocalDateTime getDateTime(){
         return realReservation.getReservationDate();
     }
+    public LocalDateTime getendTime(){
+        return realReservation.getEndTime();
+    }
+
 
 }

@@ -9,12 +9,14 @@ public class RealReservation implements ReservationService {
     private Customer CustomerName;
     private int peopleNumber;
     private LocalDateTime reservationDate;
+    private LocalDateTime endTime;
 
     @Override
-    public void createReservation(Customer CustomerName, int peopleNumber, LocalDateTime reservationDate) {
+    public void createReservation(Customer CustomerName, int peopleNumber, LocalDateTime reservationDate,LocalDateTime endTime) {
         this.CustomerName = CustomerName;
         this.peopleNumber = peopleNumber;
         this.reservationDate = reservationDate;
+        this.endTime= reservationDate.plusHours(2);
 
         System.out.println("Reservation created in name of : " + CustomerName.getName() + " For a party of : " + peopleNumber + " , On : " + reservationDate);
 
@@ -22,6 +24,10 @@ public class RealReservation implements ReservationService {
 
     public LocalDateTime getReservationDate() {
         return reservationDate;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
     public int getPeopleNumber() {

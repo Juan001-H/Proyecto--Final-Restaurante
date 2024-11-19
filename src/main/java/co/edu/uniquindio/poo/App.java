@@ -194,19 +194,20 @@ public class App {
                         System.out.print("Enter number of people for reservation: ");
                         int numberOfPeople2 = scanner.nextInt();
                         scanner.nextLine();
-                        if (numberOfPeople2 <= restaurante.availableSeats()) {
+                        if (numberOfPeople2 <= restaurante.available(reservationDate)) {
                             numberOfPeople = numberOfPeople2;
                             people = true;
                         } else {
                             System.out.println(
-                                    "The Number Of People Exceed Our Capacity, The Total Number Of Remaining Seats Is: " + restaurante.availableSeats());
+                                    "The Number Of People Exceed Our Capacity, The Total Number Of Remaining Seats Is: " + restaurante.available(reservationDate));
                         }
                     }
 
                     RealReservation reservation = new RealReservation();
                     ReservationService autenticado2 = new ResarvationProxy(reservation, true,
                             restaurante.getReservations());
-                    autenticado2.createReservation(customer7, numberOfPeople, reservationDate);
+                            LocalDateTime endTime = null;
+                    autenticado2.createReservation(customer7, numberOfPeople, reservationDate,endTime);
                     System.out.println("Reservation added successfully!");
                     break;
 

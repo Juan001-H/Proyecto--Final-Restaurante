@@ -1,11 +1,13 @@
-# proyectogay
+# proyectoFinal
 
 Descripciín basisca de su Proyecto de POO ...
 
 # Autores
 
-- Autor 1
-- Autor 2
+- Juan Herrera
+- Byron Prieto
+- Tomas Suaza
+- Juan Daniel Vera
 
 # Herramientas
 

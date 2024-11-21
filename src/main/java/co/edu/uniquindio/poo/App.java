@@ -411,7 +411,7 @@ public class App {
                     } while (!exit4);
                     break;
 
-                // Prueba De Los Metodos De Pago Despues De Generar Una Factura
+                // Prueba De Los Metodos De Pago Despues De Generar Una Factur
                 case 8:
                     boolean exit5 = false;
                     do {
